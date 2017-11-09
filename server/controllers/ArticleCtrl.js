@@ -1,4 +1,5 @@
 const Article = require('../models/Article')
+const mongoose = require('mongoose')
 
 class ArticleCtrl {
   static postArticle (req, res, next) {
@@ -51,8 +52,10 @@ class ArticleCtrl {
 
   static updateArticle (req, res, next) {
     Article.findOneAndUpdate({
-        _id: new ObjectId(req.params.articleId)
-      }, req.body)
+        _id: new mongoose.Types.ObjectId(req.params.articleId)
+      }, req.body, {
+        new: true
+      })
       .then((updated) => {
         res.status(200).json(updated);
       })
@@ -64,7 +67,7 @@ class ArticleCtrl {
 
   static deleteArticle (req, res, next) {
     Article.findOneAndRemove({
-        _id: new ObjectId(req.params.articleId)
+        _id: new mongoose.Types.ObjectId(req.params.articleId)
       })
       .then((value) => {
         res.status(200).json(value);
