@@ -31,7 +31,7 @@ export default new Vuex.Store({
       window.localStorage.removeItem('token')
     },
     setArticles: (state, payload) => {
-      this.articles = payload
+      state.articles = payload
     }
   },
 

@@ -14,7 +14,7 @@ class ArticleCtrl {
 
   static getArticles (req, res, next) {
     Article.find({})
-      .populate(['User'])
+      .populate(['author'])
       .then((articles) => {
         res.status(200).json(articles)
       })
@@ -24,7 +24,7 @@ class ArticleCtrl {
     Article.findOne({
         _id: req.params.articleId
       })
-      .populate(['User'])
+      .populate(['author'])
       .then((article) => {
         res.status(200).json(article);
       })
@@ -34,7 +34,7 @@ class ArticleCtrl {
     Article.find({
         author: req.params.id
       })
-      .populate(['User'])
+      .populate(['author'])
       .then((articles) => {
         res.status(200).json(articles);
       })
@@ -44,7 +44,7 @@ class ArticleCtrl {
     Article.find({
         category: req.params.category
       })
-      .populate(['User'])
+      .populate(['author'])
       .then((articles) => {
         res.status(200).json(articles);
       })
@@ -56,6 +56,7 @@ class ArticleCtrl {
       }, req.body, {
         new: true
       })
+      .populate(['author'])
       .then((updated) => {
         res.status(200).json(updated);
       })

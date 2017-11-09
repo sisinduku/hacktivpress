@@ -6,6 +6,9 @@
           <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
           <b-navbar-brand href="#">hactivpress</b-navbar-brand>
           <b-collapse is-nav id="nav_collapse">
+            <b-navbar-nav>
+              <b-nav-item v-if="isLogin" :to="{ name: 'dashboard', params: {}}" >Dashboard</b-nav-item>
+            </b-navbar-nav>
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
               <b-nav-item text="Lang" right>
@@ -19,6 +22,11 @@
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <router-view></router-view>
       </b-col>
     </b-row>
   </b-container>
@@ -46,7 +54,7 @@ export default {
       window.localStorage.removeItem('token')
       this.$store.commit('logout')
     },
-    ...mapActions(['getToken'])
+    ...mapActions(['getToken', 'getArticles'])
   },
 
   created () {
@@ -67,6 +75,7 @@ export default {
         version: 'v2.8' // use graph api version 2.8
       })
     }
+    this.getArticles()
   }
 }
 </script>
