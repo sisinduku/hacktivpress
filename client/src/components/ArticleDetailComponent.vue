@@ -1,6 +1,6 @@
 <template>
-  <b-list-group id='ListArticlesComponents'>
-    <b-list-group-item v-for="article in articles" :key="article._id" class="text-left">
+  <b-list-group id='ArticleDetailComponent'>
+    <b-list-group-item class="text-left">
       <b-row>
         <b-col>
           <h2>{{article.title}}</h2>
@@ -16,12 +16,22 @@
   </b-list-group>
 </template>
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 export default {
-  name: 'ListArticlesComponents',
+  name: 'ArticleDetailComponent',
+
+  props: ['articleId'],
 
   computed: {
-    ...mapState(['articles'])
+    ...mapState(['article'])
+  },
+
+  methods: {
+    ...mapActions(['getArticle'])
+  },
+
+  created () {
+    this.getArticle(this.articleId)
   }
 }
 </script>

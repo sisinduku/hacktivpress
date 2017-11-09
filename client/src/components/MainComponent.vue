@@ -4,7 +4,7 @@
       <b-col>
         <b-navbar toggleable="md" type="dark" variant="info">
           <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-          <b-navbar-brand href="#">hactivpress</b-navbar-brand>
+          <b-navbar-brand :to="{ name: 'main', params: {}}">hactivpress</b-navbar-brand>
           <b-collapse is-nav id="nav_collapse">
             <b-navbar-nav>
               <b-nav-item v-if="isLogin" :to="{ name: 'dashboard', params: {}}" >Dashboard</b-nav-item>

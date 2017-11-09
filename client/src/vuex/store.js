@@ -14,7 +14,8 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     user: {},
-    articles: []
+    articles: [],
+    article: {}
   },
 
   mutations: {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     setArticles: (state, payload) => {
       state.articles = payload
+    },
+    setCurrentArticle: (state, payload) => {
+      state.article = payload
     }
   },
 
@@ -40,6 +44,12 @@ export default new Vuex.Store({
       http.get(`api/articles/get_articles/`)
         .then(({data}) => {
           context.commit('setArticles', data)
+        })
+    },
+    getArticle: (context, payload) => {
+      http.get(`api/articles/get_article/${payload}`)
+        .then(({data}) => {
+          context.commit('setCurrentArticle', data)
         })
     },
     getToken: (context, payload) => {
