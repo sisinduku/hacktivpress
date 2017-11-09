@@ -10,7 +10,7 @@ class UserCtrl {
       appId: process.env.FBAPPID,
       appSecret: process.env.FBAPPSECRET
     })
-
+    console.log(req.headers.userid)
     fb.api(req.headers.userid, {
       fields: ['id', 'name']
     }, function (result) {
