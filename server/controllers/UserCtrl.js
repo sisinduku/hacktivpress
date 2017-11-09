@@ -27,6 +27,7 @@ class UserCtrl {
       })
         .then((user) => {
           let token = jwt.sign({
+            _id: user._id,
             userId: user.userId,
             username: user.username
           }, process.env.APPSECRET)

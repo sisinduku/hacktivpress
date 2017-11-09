@@ -53,6 +53,7 @@ export default {
     logout () {
       window.localStorage.removeItem('token')
       this.$store.commit('logout')
+      this.$router.push('/')
     },
     ...mapActions(['getToken', 'getArticles'])
   },

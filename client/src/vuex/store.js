@@ -18,6 +18,18 @@ export default new Vuex.Store({
     article: {}
   },
 
+  getters: {
+    userArticle: (state) => {
+      return state.articles.filter((article) => {
+        if (article.author) {
+          return article.author._id === state.user._id
+        } else {
+          return false
+        }
+      })
+    }
+  },
+
   mutations: {
     setUser: (state, payload) => {
       const token = window.localStorage.getItem('token')
