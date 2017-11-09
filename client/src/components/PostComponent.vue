@@ -58,18 +58,6 @@ export default {
     ...mapActions(['postArticle']),
     onSubmit () {
       console.log()
-      this.postArticle({
-        title: this.title,
-        content: this.content,
-        category: this.category,
-        author: this.user._id
-      })
-        .then(() => {
-          this.isUpdated = true
-        })
-        .catch((err) => {
-          console.error(err)
-        })
     }
   }
 }

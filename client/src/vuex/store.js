@@ -95,7 +95,6 @@ export default new Vuex.Store({
       return new Promise(function (resolve, reject) {
         http.post(`api/articles/post_article/`, payload)
           .then(({data}) => {
-            console.log('sini')
             context.commit('addArticles', data)
             resolve()
           })
