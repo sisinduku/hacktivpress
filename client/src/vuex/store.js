@@ -46,6 +46,15 @@ export default new Vuex.Store({
     setArticles: (state, payload) => {
       state.articles = payload
     },
+    updateArticles: (state, payload) => {
+      let idx = state.articles.findIndex(article =>
+        article._id === payload._id
+      )
+      state.articles.splice(idx, 1, payload)
+    },
+    addArticles: (state, payload) => {
+      state.articles.push(payload)
+    },
     setCurrentArticle: (state, payload) => {
       state.article = payload
     }
@@ -59,10 +68,41 @@ export default new Vuex.Store({
         })
     },
     getArticle: (context, payload) => {
-      http.get(`api/articles/get_article/${payload}`)
-        .then(({data}) => {
-          context.commit('setCurrentArticle', data)
-        })
+      return new Promise(function (resolve, reject) {
+        http.get(`api/articles/get_article/${payload}`)
+          .then(({data}) => {
+            context.commit('setCurrentArticle', data)
+            resolve()
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    updateArticle: (context, payload) => {
+      return new Promise(function (resolve, reject) {
+        http.put(`api/articles/update_article/${payload._id}`, payload)
+          .then(({data}) => {
+            context.commit('updateArticles', data)
+            resolve()
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    postArticle: (context, payload) => {
+      return new Promise(function (resolve, reject) {
+        http.post(`api/articles/post_article/`, payload)
+          .then(({data}) => {
+            console.log('sini')
+            context.commit('addArticles', data)
+            resolve()
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
     },
     getToken: (context, payload) => {
       http.get('api/auth/', {

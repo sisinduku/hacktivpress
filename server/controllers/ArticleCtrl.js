@@ -3,13 +3,14 @@ const mongoose = require('mongoose')
 
 class ArticleCtrl {
   static postArticle (req, res, next) {
-    Article.create(req.body)
-      .then((inserted) => {
-        res.status(201).json(inserted);
-      })
-      .catch((err) => {
+    console.log(req.body);
+    Article.create(req.body, function (err, inserted) {
+      if (err) {
         res.status(400).json(err);
-      })
+      } else {
+        res.status(200).json(inserted)
+      }
+    })
   }
 
   static getArticles (req, res, next) {

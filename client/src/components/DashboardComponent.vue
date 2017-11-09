@@ -1,6 +1,9 @@
 <template>
   <b-list-group id='DashboardComponent'>
     <h1>My Articles</h1>
+    <b-btn size="sm" variant="info" :to="{ name: 'post', params: {}}">
+      Add Article
+    </b-btn>
     <b-list-group-item v-for="article in userArticle" :key="article._id" class="text-left">
       <b-row>
         <b-col>
@@ -15,12 +18,12 @@
       </b-row>
       <b-row>
         <b-col md="1" no-gutters="true">
-          <b-btn size="sm" variant="info" :to="{ name: 'detail', params: { articleId: article._id}}">
+          <b-btn size="sm" variant="info" :to="{ name: 'edit', params: { articleId: article._id}}">
             Edit
           </b-btn>
         </b-col>
         <b-col md="1">
-          <b-btn size="sm" variant="danger" :to="{ name: 'detail', params: { articleId: article._id}}">
+          <b-btn size="sm" variant="danger">
             Delete
           </b-btn>
         </b-col>
